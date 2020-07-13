@@ -1,0 +1,35 @@
+
+
+plugins {
+    // Apply the java plugin to add support for Java
+    id 'java'
+
+    // Apply the application plugin to add support for building a CLI application.
+    id 'application'
+}
+
+repositories {
+
+    jcenter()
+}
+
+dependencies {
+    // This dependency is used by the application.
+    implementation 'com.google.guava:guava:29.0-jre'
+
+    // Use JUnit test framework
+    testImplementation 'junit:junit:4.13'
+
+    implementation group: 'net.dv8tion', name: 'JDA', version: '4.2.0_168'
+    implementation group: 'com.jagrosh', name: 'jda-utilities', version: '3.0.1'
+    implementation group: 'me.duncte123', name: 'botCommons', version: '1.0.45'
+    implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+    implementation group: 'io.github.cdimascio', name: 'java-dotenv', version: '5.1.1'
+}
+
+application {
+    // Define the main class for the application.
+    mainClassName = 'com.loverian.Dmusic.Bot'
+    version '1.0'
+    sourceCompatibility = JavaVersion.VERSION_14
+}
