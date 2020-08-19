@@ -4,6 +4,8 @@ import com.loverian.Dmusic.command.CommandContext;
 import com.loverian.Dmusic.command.Icommand;
 import com.loverian.Dmusic.command.commands.HelpCommand;
 import com.loverian.Dmusic.command.commands.PingCommand;
+import com.loverian.Dmusic.command.commands.music.*;
+import com.loverian.Dmusic.command.commands.owner.EvalCommand;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import org.jetbrains.annotations.Nullable;
 
@@ -16,8 +18,17 @@ public class CommandManager {
     private final List<Icommand> commands = new ArrayList<>();
 
     public CommandManager() {
+        addCommand(new PlayCommand());
+        addCommand(new JoinCommand());
+        addCommand(new LeaveCommand());
+        addCommand(new NpCommand());
+        addCommand(new QueueCommand());
+        addCommand(new SkipCommand());
+        addCommand(new StopCommand());
+        addCommand(new FwdCommand());
         addCommand(new PingCommand());
         addCommand(new HelpCommand(this));
+        addCommand(new EvalCommand());
     }
 
     private void addCommand(Icommand cmd) {
@@ -54,7 +65,7 @@ public class CommandManager {
         Icommand cmd = this.getCommand(invoke);
 
         if (cmd != null) {
-            event.getChannel().sendTyping().queue();
+            //event.getChannel().sendTyping().queue();
             List<String> args = Arrays.asList(split).subList(1, split.length);
 
             CommandContext ctx = new CommandContext(event, args);

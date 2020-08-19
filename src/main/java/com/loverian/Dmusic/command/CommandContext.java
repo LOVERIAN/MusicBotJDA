@@ -21,6 +21,8 @@ public class CommandContext implements ICommandContext {
         return this.getEvent().getGuild();
     }
 
+
+
     @Override
     public GuildMessageReceivedEvent getEvent() {
         return this.event;

@@ -1,5 +1,7 @@
 package com.loverian.Dmusic.command;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public interface Icommand {
@@ -12,6 +14,6 @@ public interface Icommand {
     String getHelp();
 
     default List<String> getAliases(){
-        return List.of();
+        return Collections.emptyList();
     }
 }

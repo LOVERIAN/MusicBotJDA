@@ -6,11 +6,10 @@ import net.dv8tion.jda.api.entities.Activity;
 import javax.security.auth.login.LoginException;
 
 public class Bot {
-    private Bot() throws LoginException {
-        new JDABuilder()
-                .setToken(Config.get("TOKEN"))
+    private Bot() throws LoginException{
+        JDABuilder.createDefault(Config.get("TOKEN"))
                 .addEventListeners(new Listener())
-                .setActivity(Activity.listening("LOVERIAN"))
+                .setActivity(Activity.listening(Config.get("GAME")))
                 .build();
     }
 

@@ -4,8 +4,11 @@ import com.loverian.Dmusic.CommandManager;
 import com.loverian.Dmusic.Config;
 import com.loverian.Dmusic.command.CommandContext;
 import com.loverian.Dmusic.command.Icommand;
+import me.duncte123.botcommons.messaging.EmbedUtils;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.TextChannel;
 
+import java.awt.*;
 import java.util.List;
 
 public class HelpCommand implements Icommand {
@@ -22,15 +25,20 @@ public class HelpCommand implements Icommand {
         TextChannel channel = ctx.getChannel();
 
         if (args.isEmpty()) {
+            EmbedBuilder eb = EmbedUtils.defaultEmbed();
+            eb.setAuthor("All about " + ctx.getSelfMember().getEffectiveName() + "!", Config.get("LOGOu"), Config.get("LOGO"));
+            eb.setDescription("The official Dynamo Gaming discord music bot owned by " +
+                    Config.get("OWN"));
             StringBuilder builder = new StringBuilder();
-
-            builder.append("List of commands\n");
-
+            builder.append("\n\nList of commands\n");
             manager.getCommands().stream().map(Icommand::getName).forEach(
-                    (it) -> builder.append('`').append(Config.get("PREFIX")).append(it).append("`\n")
-            );
-
-            channel.sendMessage(builder.toString()).queue();
+                    (it) -> { if (!it.equals("eval"))
+                        builder.append('`').append(Config.get("PREFIX")).append(it).append("`\n");
+                    });
+            eb.appendDescription(builder.toString());
+            eb.appendDescription("\n [Click here](https://discord.com/api/oauth2/authorize?client_id=665628292958781460&permissions=37080128&scope=bot) to invite to your server");
+            eb.setColor(Color.orange);
+            channel.sendMessage(eb.build()).queue();
             return;
         }
         String search = args.get(0);
